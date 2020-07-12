@@ -13,6 +13,9 @@ dependencies:
   dartz:
   freezed_annotation:
   flutter_bloc:
+  firebase_core:
+  firebase_auth:
+  google_sign_in:
 
   cupertino_icons: ^0.1.3
 
