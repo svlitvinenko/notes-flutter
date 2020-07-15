@@ -6,7 +6,9 @@ import 'package:injectable/injectable.dart';
 import 'package:kata_note_flutter/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:kata_note_flutter/domain/auth/i_auth_facade.dart';
+import 'package:kata_note_flutter/domain/auth/user.dart';
 import 'package:kata_note_flutter/domain/auth/value_objects.dart';
+import 'package:kata_note_flutter/infrastructure/auth/firebase_user_mapper.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -71,4 +73,17 @@ class FirebaseAuthFacade implements IAuthFacade {
       return left(const AuthFailure.serverError());
     }
   }
+
+  @override
+  Future<Option<User>> getSignedInUser() {
+    return _firebaseAuth.currentUser().then((firebaseUser) => optionOf(firebaseUser?.toDomain()));
+  }
+
+  @override
+  Future<void> signOut() => Future.wait(
+        [
+          _firebaseAuth.signOut(),
+          _googleSignIn.signOut(),
+        ],
+      );
 }
