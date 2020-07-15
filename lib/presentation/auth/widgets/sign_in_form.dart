@@ -1,5 +1,4 @@
 import 'package:flushbar/flushbar.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kata_note_flutter/app/auth/sign_in_form/sign_in_form_bloc.dart';
@@ -14,10 +13,10 @@ class SignInForm extends StatelessWidget {
           (eigher) => eigher.fold(
             (error) {
               final snackbar = Flushbar(
-                icon: const Icon(
+                icon: Icon(
                   Icons.error_outline,
                   size: 28.0,
-                  color: Colors.red,
+                  color: Theme.of(context).errorColor,
                 ),
                 dismissDirection: FlushbarDismissDirection.VERTICAL,
                 duration: const Duration(seconds: 3),
