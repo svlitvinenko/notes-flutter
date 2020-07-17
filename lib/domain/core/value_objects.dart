@@ -15,7 +15,10 @@ abstract class ValueObject<T> {
   T getOrCrash() => value.fold((l) => throw UnexpectedValueError(failure: l), id);
 
   Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
-    return value.fold(left, (_) => right(unit));
+    return value.fold(
+      (l) => left(l),
+      (r) => right(unit),
+    );
   }
 
   @override

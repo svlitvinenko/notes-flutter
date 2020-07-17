@@ -26,6 +26,6 @@ abstract class TodoItem implements _$TodoItem {
 
   /// Опция с возможной ошибкой.
   Option<ValueFailure<dynamic>> get failureOption {
-    return name.value.fold(some, (_) => null);
+    return name.value.fold(some, (_) => none());
   }
 }
