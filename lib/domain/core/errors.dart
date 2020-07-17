@@ -11,3 +11,10 @@ class UnexpectedValueError extends Error {
     return Error.safeToString('Found an invalid value at unrecoverable palce of code logic.\n\n${failure.toString()}\n\nTerminating...');
   }
 }
+
+class NotAuthorizedError extends Error {
+  @override
+  String toString() {
+    return Error.safeToString('A method called requires the user to be authorized.');
+  }
+}

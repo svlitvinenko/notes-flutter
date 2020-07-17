@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kata_note_flutter/app/auth/auth_bloc.dart';
 import 'package:kata_note_flutter/injection.dart';
-import 'package:kata_note_flutter/presentation/auth/sign_in_page.dart';
 import 'package:kata_note_flutter/presentation/routes/router.gr.dart';
 
 class AppWidget extends StatelessWidget {
