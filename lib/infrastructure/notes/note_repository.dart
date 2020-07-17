@@ -29,7 +29,7 @@ class NoteRepository implements INoteRepository {
                 return NoteDto.fromFirestore(document).toDomain();
               },
             ).toImmutableList()))
-        .onErrorReturnWith(_mapExceptionToNoteFailure);
+        .onErrorReturnWith((e) => left(_mapExceptionToNoteFailure(e)));
   }
 
   @override
@@ -44,32 +44,56 @@ class NoteRepository implements INoteRepository {
             .where((e) => e.todos.getOrCrash().any((todo) => !todo.isDone))
             .toImmutableList())
         .map((notes) => right<NoteFailure, KtList<Note>>(notes))
-        .onErrorReturnWith(_mapExceptionToNoteFailure);
+        .onErrorReturnWith((e) => left(_mapExceptionToNoteFailure(e)));
   }
 
   @override
-  Future<Either<NoteFailure, Unit>> create(Note note) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<Either<NoteFailure, Unit>> create(Note note) async {
+    try {
+      final userDocument = await _firestore.userDocument();
+      final NoteDto dto = NoteDto.fromDomain(note);
+
+      //! Вызвать noteCollection.add(dto.toJson()) нельзя, потому что в этом случае ID будет сгенерировано сервером,
+      //! а нужное значение будет утеряно.
+      await userDocument.noteCollection.document(dto.id).setData(dto.toJson());
+
+      return right(unit);
+    } on PlatformException catch (e) {
+      return left(_mapExceptionToNoteFailure(e));
+    }
   }
 
   @override
-  Future<Either<NoteFailure, Unit>> delete(Note note) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<NoteFailure, Unit>> delete(Note note) async {
+    try {
+      final userDocument = await _firestore.userDocument();
+      final String noteId = note.id.getOrCrash();
+      await userDocument.noteCollection.document(noteId).delete();
+      return right(unit);
+    } on PlatformException catch (e) {
+      return left(_mapExceptionToNoteFailure(e));
+    }
   }
 
   @override
-  Future<Either<NoteFailure, Unit>> update(Note note) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Either<NoteFailure, Unit>> update(Note note) async {
+    try {
+      final userDocument = await _firestore.userDocument();
+      final NoteDto dto = NoteDto.fromDomain(note);
+      await userDocument.noteCollection.document(dto.id).updateData(dto.toJson());
+      return right(unit);
+    } on PlatformException catch (e) {
+      return left(_mapExceptionToNoteFailure(e));
+    }
   }
 
-  Either<NoteFailure, KtList<Note>> _mapExceptionToNoteFailure(dynamic exception) {
+  NoteFailure _mapExceptionToNoteFailure(dynamic exception) {
     if (exception is PlatformException && exception.message.contains('PERMISSION_DENIED')) {
-      return left(const NoteFailure.insufficientPermission());
+      return const NoteFailure.insufficientPermission();
+    } else if (exception is PlatformException && exception.message.contains('NOT_FOUND')) {
+      return const NoteFailure.unableToUpdate();
     } else {
-      return left(const NoteFailure.unexpected());
+      return const NoteFailure.unexpected();
     }
   }
 }
