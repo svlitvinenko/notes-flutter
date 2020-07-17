@@ -20,6 +20,8 @@ class NoteBody extends ValueObject<String> {
     );
   }
 
+  factory NoteBody.empty() => NoteBody('');
+
   const NoteBody._(this.value);
 }
 
@@ -56,10 +58,12 @@ class NoteColor extends ValueObject<Color> {
     return NoteColor._(right(makeColorOpaque(input)));
   }
 
+  factory NoteColor.initial() => NoteColor(acceptableColors.first);
+
   const NoteColor._(this.value);
 }
 
-class FiniteList<T> extends ValueObject<KtList<T>> {
+class List3<T> extends ValueObject<KtList<T>> {
   static const int maxSize = 3;
 
   @override
@@ -67,12 +71,14 @@ class FiniteList<T> extends ValueObject<KtList<T>> {
 
   static const int maxLength = 1000;
 
-  factory FiniteList(KtList<T> input) {
+  factory List3(KtList<T> input) {
     assert(input != null);
-    return FiniteList<T>._(validateMaxListLength(input, maxLength));
+    return List3<T>._(validateMaxListLength(input, maxLength));
   }
 
-  const FiniteList._(this.value);
+  factory List3.empty() => List3(emptyList());
+
+  const List3._(this.value);
 
   int get length => value.getOrElse(() => emptyList()).size;
 

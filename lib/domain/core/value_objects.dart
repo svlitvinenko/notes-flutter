@@ -14,6 +14,10 @@ abstract class ValueObject<T> {
   /// Генерирует ошибку [UnexpectedValueError] с описанием ошибки [ValueFailure], если произведена попытка получить невалидное значение.
   T getOrCrash() => value.fold((l) => throw UnexpectedValueError(failure: l), id);
 
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    return value.fold(left, (_) => right(unit));
+  }
+
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
@@ -32,9 +36,7 @@ class UniqueId extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory UniqueId() {
-    return UniqueId._(right(Uuid().v1()));
-  }
+  factory UniqueId.generate() => UniqueId._(right(Uuid().v1()));
 
   factory UniqueId.fromUniqueString(String uniqueId) {
     assert(uniqueId != null);
