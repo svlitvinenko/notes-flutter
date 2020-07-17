@@ -21,6 +21,8 @@ dependencies:
   flushbar: ^1.10.4
   uuid: ^2.2.0
   auto_route: ^0.6.1
+  json_annotation: ^3.0.1
+  cloud_firestore: ^0.13.7
 
   kt_dart: ^0.7.0+1
 
@@ -34,6 +36,7 @@ dev_dependencies:
   lint: ^1.2.0
   injectable_generator: ^0.4.1
   auto_route_generator: ^0.6.0
+  json_serializable: ^3.3.0
 
 flutter:
   uses-material-design: true
