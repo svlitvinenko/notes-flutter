@@ -10,6 +10,8 @@ import 'package:kt_dart/collection.dart';
 import 'package:notes/infrastructure/core/firestore_helpers.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../domain/notes/note_failure.dart';
+
 @LazySingleton(as: INoteRepository)
 class NoteRepository implements INoteRepository {
   final Firestore _firestore;
