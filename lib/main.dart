@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kata_note_flutter/injection.dart';
-import 'package:kata_note_flutter/presentation/core/app_widget.dart';
+import 'package:notes/injection.dart';
+import 'package:notes/presentation/core/app_widget.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

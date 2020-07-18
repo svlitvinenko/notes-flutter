@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kata_note_flutter/injection.iconfig.dart';
+import 'package:notes/injection.iconfig.dart';
 
 final GetIt getIt = GetIt.instance;
 

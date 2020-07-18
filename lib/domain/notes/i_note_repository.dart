@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:kata_note_flutter/domain/notes/note.dart';
-import 'package:kata_note_flutter/domain/notes/note_failure.dart';
+import 'package:notes/domain/notes/note.dart';
+import 'package:notes/domain/notes/note_failure.dart';
 import 'package:kt_dart/collection.dart';
 
 abstract class INoteRepository {

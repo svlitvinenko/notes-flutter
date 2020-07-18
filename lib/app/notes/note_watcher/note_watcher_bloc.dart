@@ -4,9 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kata_note_flutter/domain/notes/i_note_repository.dart';
-import 'package:kata_note_flutter/domain/notes/note.dart';
-import 'package:kata_note_flutter/domain/notes/note_failure.dart';
+import 'package:notes/domain/notes/i_note_repository.dart';
+import 'package:notes/domain/notes/note.dart';
+import 'package:notes/domain/notes/note_failure.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 

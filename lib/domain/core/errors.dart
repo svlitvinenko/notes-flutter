@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:kata_note_flutter/domain/core/failures.dart';
+import 'package:notes/domain/core/failures.dart';
 
 class UnexpectedValueError extends Error {
   final ValueFailure failure;

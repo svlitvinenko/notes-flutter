@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kata_note_flutter/app/notes/note_watcher/note_watcher_bloc.dart';
-import 'package:kata_note_flutter/domain/notes/note.dart';
+import 'package:notes/app/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:notes/domain/notes/note.dart';
 
 class NotesOverviewBodyWidget extends StatelessWidget {
   @override

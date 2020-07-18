@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kata_note_flutter/domain/core/failures.dart';
-import 'package:kata_note_flutter/domain/core/value_objects.dart';
-import 'package:kata_note_flutter/domain/notes/value_objects.dart';
+import 'package:notes/domain/core/failures.dart';
+import 'package:notes/domain/core/value_objects.dart';
+import 'package:notes/domain/notes/value_objects.dart';
 
 part 'todo_item.freezed.dart';
 

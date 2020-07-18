@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kata_note_flutter/domain/auth/third_party_auth_methods.dart';
+import 'package:notes/domain/auth/third_party_auth_methods.dart';
 
 part 'auth_failure.freezed.dart';
 

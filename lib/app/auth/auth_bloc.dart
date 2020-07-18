@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kata_note_flutter/domain/auth/i_auth_facade.dart';
-import 'package:kata_note_flutter/domain/auth/user.dart';
+import 'package:notes/domain/auth/i_auth_facade.dart';
+import 'package:notes/domain/auth/user.dart';
 import 'package:meta/meta.dart';
 
 part 'auth_event.dart';

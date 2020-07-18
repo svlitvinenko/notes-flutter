@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:kata_note_flutter/domain/core/failures.dart';
+import 'package:notes/domain/core/failures.dart';
 import 'package:kt_dart/collection.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {

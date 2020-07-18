@@ -1,7 +1,7 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kata_note_flutter/domain/config/i_config_facade.dart';
+import 'package:notes/domain/config/i_config_facade.dart';
 
 @LazySingleton(as: IConfigFacade)
 class FirebaseConfigFacade implements IConfigFacade {

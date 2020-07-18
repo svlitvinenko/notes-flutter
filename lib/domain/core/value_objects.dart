@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kata_note_flutter/domain/core/errors.dart';
-import 'package:kata_note_flutter/domain/core/failures.dart';
+import 'package:notes/domain/core/errors.dart';
+import 'package:notes/domain/core/failures.dart';
 import 'package:uuid/uuid.dart';
 
 @immutable
