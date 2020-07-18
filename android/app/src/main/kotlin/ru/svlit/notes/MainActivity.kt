@@ -1,4 +1,4 @@
-package com.example.kata_note_flutter
+package ru.svlit.notes
 
 import io.flutter.embedding.android.FlutterActivity
 

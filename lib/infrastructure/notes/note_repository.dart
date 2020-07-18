@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kata_note_flutter/domain/notes/i_note_repository.dart';
-import 'package:kata_note_flutter/domain/notes/note_failure.dart';
-import 'package:kata_note_flutter/domain/notes/note.dart';
-import 'package:kata_note_flutter/infrastructure/notes/note_dtos.dart';
+import 'package:notes/domain/notes/i_note_repository.dart';
+import 'package:notes/domain/notes/note_failure.dart';
+import 'package:notes/domain/notes/note.dart';
+import 'package:notes/infrastructure/notes/note_dtos.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:kata_note_flutter/infrastructure/core/firestore_helpers.dart';
+import 'package:notes/infrastructure/core/firestore_helpers.dart';
 import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: INoteRepository)

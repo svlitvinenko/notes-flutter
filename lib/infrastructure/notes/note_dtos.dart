@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kata_note_flutter/domain/core/value_objects.dart';
-import 'package:kata_note_flutter/domain/notes/note.dart';
-import 'package:kata_note_flutter/domain/notes/todo_item.dart';
-import 'package:kata_note_flutter/domain/notes/value_objects.dart';
+import 'package:notes/domain/core/value_objects.dart';
+import 'package:notes/domain/notes/note.dart';
+import 'package:notes/domain/notes/todo_item.dart';
+import 'package:notes/domain/notes/value_objects.dart';
 import 'package:kt_dart/kt.dart';
 
 part 'note_dtos.freezed.dart';

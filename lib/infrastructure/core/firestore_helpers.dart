@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:kata_note_flutter/domain/auth/i_auth_facade.dart';
-import 'package:kata_note_flutter/domain/auth/user.dart';
-import 'package:kata_note_flutter/domain/core/errors.dart';
-import 'package:kata_note_flutter/injection.dart';
+import 'package:notes/domain/auth/i_auth_facade.dart';
+import 'package:notes/domain/auth/user.dart';
+import 'package:notes/domain/core/errors.dart';
+import 'package:notes/injection.dart';
 
 extension FirestoreX on Firestore {
   Future<DocumentReference> userDocument() async {

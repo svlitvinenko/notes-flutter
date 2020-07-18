@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:dartz/dartz.dart';
-import 'package:kata_note_flutter/domain/core/failures.dart';
-import 'package:kata_note_flutter/domain/core/value_objects.dart';
-import 'package:kata_note_flutter/domain/core/value_transformers.dart';
-import 'package:kata_note_flutter/domain/core/value_validators.dart';
+import 'package:notes/domain/core/failures.dart';
+import 'package:notes/domain/core/value_objects.dart';
+import 'package:notes/domain/core/value_transformers.dart';
+import 'package:notes/domain/core/value_validators.dart';
 import 'package:kt_dart/collection.dart';
 
 class NoteBody extends ValueObject<String> {

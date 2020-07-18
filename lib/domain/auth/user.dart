@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kata_note_flutter/domain/core/value_objects.dart';
+import 'package:notes/domain/core/value_objects.dart';
 
 part 'user.freezed.dart';
 

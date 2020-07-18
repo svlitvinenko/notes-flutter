@@ -6,11 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kata_note_flutter/domain/notes/i_note_repository.dart';
-import 'package:kata_note_flutter/domain/notes/note.dart';
-import 'package:kata_note_flutter/domain/notes/note_failure.dart';
-import 'package:kata_note_flutter/domain/notes/value_objects.dart';
-import 'package:kata_note_flutter/presentation/notes/note_form/misc/presentation_classes.dart';
+import 'package:notes/domain/notes/i_note_repository.dart';
+import 'package:notes/domain/notes/note.dart';
+import 'package:notes/domain/notes/note_failure.dart';
+import 'package:notes/domain/notes/value_objects.dart';
+import 'package:notes/presentation/notes/note_form/misc/presentation_classes.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 

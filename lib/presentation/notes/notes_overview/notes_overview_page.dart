@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kata_note_flutter/app/auth/auth_bloc.dart';
-import 'package:kata_note_flutter/app/notes/note_actor/note_actor_bloc.dart';
-import 'package:kata_note_flutter/app/notes/note_watcher/note_watcher_bloc.dart';
-import 'package:kata_note_flutter/injection.dart';
-import 'package:kata_note_flutter/presentation/notes/notes_overview/widgets/notes_overview_body_widget.dart';
-import 'package:kata_note_flutter/presentation/routes/router.gr.dart';
+import 'package:notes/app/auth/auth_bloc.dart';
+import 'package:notes/app/notes/note_actor/note_actor_bloc.dart';
+import 'package:notes/app/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:notes/injection.dart';
+import 'package:notes/presentation/notes/notes_overview/widgets/notes_overview_body_widget.dart';
+import 'package:notes/presentation/routes/router.gr.dart';
 
 class NotesOverviewPage extends StatelessWidget {
   @override
