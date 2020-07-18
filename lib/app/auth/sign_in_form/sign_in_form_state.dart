@@ -8,6 +8,7 @@ abstract class SignInFormState with _$SignInFormState {
     @required bool isSubmitting,
     @required bool showErrorMessages,
     @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
+    @required Option<KtList<ThirdPartyAuthMethod>> availableThirdPartyAuthMethods,
   }) = _SignInFormState;
 
   factory SignInFormState.initial() => SignInFormState(
@@ -16,5 +17,6 @@ abstract class SignInFormState with _$SignInFormState {
         isSubmitting: false,
         showErrorMessages: false,
         authFailureOrSuccessOption: none(),
+        availableThirdPartyAuthMethods: none(),
       );
 }

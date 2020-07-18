@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kata_note_flutter/app/auth/auth_bloc.dart';
 import 'package:kata_note_flutter/app/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:kata_note_flutter/domain/auth/third_party_auth_methods.dart';
 import 'package:kata_note_flutter/presentation/routes/router.gr.dart';
+import 'package:kt_dart/kt.dart';
 
 class SignInForm extends StatelessWidget {
   @override
@@ -32,6 +34,7 @@ class SignInForm extends StatelessWidget {
                   serverError: (_) => 'An unknown error occurred',
                   emailAlreadyInUse: (_) => 'This email is already in use',
                   invalidEmailAndPasswordCombination: (_) => 'Invalid email and password combination',
+                  authMethodIsDenied: (_) => 'This authentication method is denied',
                 ),
               );
               snackbar.show(context);
@@ -47,6 +50,8 @@ class SignInForm extends StatelessWidget {
         return Form(
           autovalidate: state.showErrorMessages,
           child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             children: [
               const Text(
                 '⚓️',
@@ -114,19 +119,31 @@ class SignInForm extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              RaisedButton(
-                color: Colors.lightBlue,
-                onPressed: () {
-                  FocusScope.of(context).unfocus();
-                  context.bloc<SignInFormBloc>().add(const SignInFormEvent.signInWithGooglePressed());
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.availableThirdPartyAuthMethods.getOrElse(() => listOf()).size,
+                itemBuilder: (context, index) {
+                  final ThirdPartyAuthMethod currentAuthMethod = state.availableThirdPartyAuthMethods.getOrElse(() => listOf())[index];
+                  return RaisedButton(
+                    color: Colors.lightBlue,
+                    onPressed: state.isSubmitting
+                        ? null
+                        : () {
+                            FocusScope.of(context).unfocus();
+                            context.bloc<SignInFormBloc>().add(SignInFormEvent.signInWithThirdPartyMethodPressed(currentAuthMethod));
+                          },
+                    child: Text(
+                      currentAuthMethod.map(
+                        google: (_) => 'SIGN IN WITH GOOGLE',
+                        apple: (_) => 'SIGN IN WITH APPLE',
+                      ),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
                 },
-                child: const Text(
-                  'SIGN IN WITH GOOGLE',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
               ),
               if (state.isSubmitting) ...[
                 const SizedBox(

@@ -6,16 +6,20 @@ import 'package:injectable/injectable.dart';
 import 'package:kata_note_flutter/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:kata_note_flutter/domain/auth/i_auth_facade.dart';
+import 'package:kata_note_flutter/domain/auth/third_party_auth_methods.dart';
 import 'package:kata_note_flutter/domain/auth/user.dart';
 import 'package:kata_note_flutter/domain/auth/value_objects.dart';
+import 'package:kata_note_flutter/domain/config/i_config_facade.dart';
 import 'package:kata_note_flutter/infrastructure/auth/firebase_user_mapper.dart';
+import 'package:kt_dart/collection.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final IConfigFacade _configFacade;
 
-  FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn);
+  FirebaseAuthFacade(this._firebaseAuth, this._googleSignIn, this._configFacade);
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({@required EmailAddress emailAddress, @required Password password}) async {
@@ -51,8 +55,7 @@ class FirebaseAuthFacade implements IAuthFacade {
     }
   }
 
-  @override
-  Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
+  Future<Either<AuthFailure, Unit>> _signInWithGoogle() async {
     try {
       final GoogleSignInAccount googleAuthResult = await _googleSignIn.signIn();
 
@@ -86,4 +89,35 @@ class FirebaseAuthFacade implements IAuthFacade {
           _googleSignIn.signOut(),
         ],
       );
+
+  @override
+  Future<KtSet<ThirdPartyAuthMethod>> getAvailableThirdPartyAuthMethods() async {
+    final KtMutableSet<ThirdPartyAuthMethod> authMethods = mutableSetOf();
+
+    final bool isGoogleEnabled = await _configFacade.isParameterEnabled(
+      parameterName: 'sign_in_with_google',
+      defaultValue: false,
+    );
+    if (isGoogleEnabled) {
+      authMethods.add(const ThirdPartyAuthMethod.google());
+    }
+
+    final bool isAppleEnabled = await _configFacade.isParameterEnabled(
+      parameterName: 'sign_in_with_apple',
+      defaultValue: false,
+    );
+    if (isAppleEnabled) {
+      authMethods.add(const ThirdPartyAuthMethod.apple());
+    }
+
+    return authMethods;
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> signInWithThirdPartyMethodPressed(ThirdPartyAuthMethod authMethod) async {
+    return authMethod.map(
+      google: (_) => _signInWithGoogle(),
+      apple: (_) => left(AuthFailure.authMethodIsDenied(authMethod)),
+    );
+  }
 }

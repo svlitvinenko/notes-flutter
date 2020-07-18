@@ -6,7 +6,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kata_note_flutter/domain/auth/auth_failure.dart';
 import 'package:kata_note_flutter/domain/auth/i_auth_facade.dart';
+import 'package:kata_note_flutter/domain/auth/third_party_auth_methods.dart';
 import 'package:kata_note_flutter/domain/auth/value_objects.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 part 'sign_in_form_event.dart';
@@ -24,6 +26,14 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     SignInFormEvent event,
   ) async* {
     yield* event.map(
+      getThirdPartyMethodsRequested: (e) async* {
+        yield state.copyWith(isSubmitting: true);
+        final KtSet<ThirdPartyAuthMethod> availableThirdPatyAuthMethods = await _authFacade.getAvailableThirdPartyAuthMethods();
+        yield state.copyWith(
+          availableThirdPartyAuthMethods: some(availableThirdPatyAuthMethods.toList()),
+          isSubmitting: false,
+        );
+      },
       emailChanged: (e) async* {
         yield state.copyWith(
           emailAddress: EmailAddress(e.email),
@@ -42,13 +52,13 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       signInWithEmailAndPasswordPressed: (e) async* {
         yield* _performActionWithAuthFacade(_authFacade.signInWithEmailAndPassword);
       },
-      signInWithGooglePressed: (e) async* {
+      signInWithThirdPartyMethodPressed: (e) async* {
         yield state.copyWith(
           isSubmitting: true,
           authFailureOrSuccessOption: none(),
         );
 
-        final Either<AuthFailure, Unit> failureOrSuccess = await _authFacade.signInWithGoogle();
+        final Either<AuthFailure, Unit> failureOrSuccess = await _authFacade.signInWithThirdPartyMethodPressed(e.method);
 
         yield state.copyWith(
           isSubmitting: false,
