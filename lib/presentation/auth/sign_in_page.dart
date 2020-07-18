@@ -12,7 +12,7 @@ class SignInPage extends StatelessWidget {
         title: const Text('Sign In'),
       ),
       body: BlocProvider(
-        create: (context) => getIt<SignInFormBloc>(),
+        create: (context) => getIt<SignInFormBloc>()..add(const SignInFormEvent.getThirdPartyMethodsRequested()),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
